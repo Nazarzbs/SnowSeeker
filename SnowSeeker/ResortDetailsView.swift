@@ -28,22 +28,30 @@ struct ResortDetailsView: View {
     var body: some View {
         Group {
             VStack {
-                Text("Size")
+                Label("Size", systemImage: "ruler.fill")
                     .font(.caption.bold())
+                    .foregroundColor(.secondary)
                 
                 Text(size)
-                    .font(.title3)
+                    .font(.title2)
+                    .foregroundColor(.primary)
             }
             
             VStack{
-                Text("Price")
+                Label("Price", systemImage: "dollarsign.circle")
                     .font(.caption.bold())
+                    .foregroundColor(.secondary)
                 
                 Text(price)
-                    .font(.title3)
+                    .font(.title2)
+                    .foregroundColor(.primary)
             }
         }
         .frame(maxWidth: .infinity)
+        .padding(2)
+        .background(Color(.systemGray6))
+        .cornerRadius(10)
+        .shadow(color: .black.opacity(0.2), radius: 3, x: 2, y: 2) 
     }
 }
 

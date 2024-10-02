@@ -24,14 +24,16 @@ struct ResortView: View {
                     Image(decorative: resort.id)
                         .resizable()
                         .scaledToFit()
+                        .shadow(color: .black.opacity(0.4), radius: 3, x: 2, y: 2)  
                     
                     Text("Photo: \(resort.imageCredit)")
                         .font(.footnote)
                         .padding(4)
                         .background(Color.black.opacity(0.5))
-                        .foregroundColor(.white) 
-                        .cornerRadius(4)  
+                        .foregroundColor(.white)
+                        .cornerRadius(4)
                         .padding([.bottom, .trailing], 5)
+                        .shadow(color: .black.opacity(0.4), radius: 3, x: 2, y: 2)
                 }
                 
                 HStack {
@@ -49,17 +51,19 @@ struct ResortView: View {
                     }
                 }
                 .padding(.vertical)
-                .background(.primary.opacity(0.1))
                 .dynamicTypeSize(...DynamicTypeSize.xxxLarge)
                 
-                Group {
+                VStack(alignment: .leading, spacing: 20) {
                     Text(resort.description)
-                        .padding(.vertical)
+                        .background(Color.primary.opacity(0.03))
+                        .cornerRadius(8)
                     
                     Text("Facilities")
-                        .font(.headline)
+                        .font(.title2)
+                        .padding(.top)
+                        .bold()
                     
-                    HStack {
+                    HStack(alignment: .center) {
                         ForEach(resort.facilityTypes) { facility in
                             Button {
                                 selectedFacility = facility
@@ -67,25 +71,45 @@ struct ResortView: View {
                             } label: {
                                 facility.icon
                                     .font(.title)
+                                    .padding(10)
+                                    .background(Color(.systemGray6))
+                                    .foregroundColor(.black)
+                                    .cornerRadius(10)
+                                    .padding([.bottom, .trailing], 5)
+                                    .shadow(color: .black.opacity(0.2), radius: 3, x: 2, y: 2)
+                             
                             }
+                            
                         }
                     }
-                    .padding(.vertical)
                     
                     Text(resort.facilities, format: .list(type: .and))
-                        .padding(.vertical)
+                        .padding()
+                        .background(Color(.systemGray6))
+                        .foregroundColor(.black)
+                        .cornerRadius(10)
+                        .shadow(color: .black.opacity(0.2), radius: 3, x: 2, y: 2)
                 }
                 .padding(.horizontal)
+                .padding(.top)
                 
-                Button(favorites.contains(resort) ? "Remove from Favorites" : "Add to Favorites") {
+                Button {
                     if favorites.contains(resort) {
                         favorites.remove(resort)
                     } else {
                         favorites.add(resort)
                     }
+                } label: {
+                    HStack {
+                        Image(systemName: favorites.contains(resort) ? "heart.fill" : "heart")  // Heart icon changes based on favorite status
+                        Text(favorites.contains(resort) ? "Remove from Favorites" : "Add to Favorites")
+                    }
                 }
                 .buttonStyle(.borderedProminent)
+                .tint(favorites.contains(resort) ? .red : .blue)
+                .cornerRadius(10)
                 .padding()
+                .shadow(radius: 4)
             }
         }
         .navigationTitle("\(resort.name), \(resort.country)")

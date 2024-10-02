@@ -89,11 +89,11 @@ struct ContentView: View {
                             Text("Sort")
                             Image(systemName: "line.horizontal.3.decrease.circle")
                         }
-                        .foregroundColor(.white)
+                        .foregroundColor(.black)
+                        .font(.title3)
                     }
                 }
             }
-           
             .navigationDestination(for: Resort.self) { resort in
                 ResortView(resort: resort)
             }

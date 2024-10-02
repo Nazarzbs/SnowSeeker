@@ -13,22 +13,30 @@ struct SkiDetailsView: View {
     var body: some View {
         Group {
             VStack {
-                Text("Elevation")
+                Label("Elevation", systemImage: "mountain.2")
                     .font(.caption.bold())
+                    .foregroundColor(.secondary)
                 
                 Text("\(resort.elevation)m")
-                    .font(.title3)
+                    .font(.title2)
+                    .foregroundColor(.primary)
             }
             
             VStack {
-                Text("Snow")
+                Label("Snow", systemImage: "snowflake")
                     .font(.caption.bold())
+                    .foregroundColor(.secondary)
                 
                 Text("\(resort.snowDepth)cm")
-                    .font(.title3)
+                    .font(.title2)
+                    .foregroundColor(.primary)
             }
         }
         .frame(maxWidth: .infinity)
+        .padding(2)
+        .background(Color(.systemGray6))
+        .cornerRadius(10)
+        .shadow(color: .black.opacity(0.2), radius: 3, x: 2, y: 2)
     }
 }
 
